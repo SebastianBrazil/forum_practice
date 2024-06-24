@@ -34,11 +34,22 @@ export default function page() {
                 console.log(getNumbs);
                 isPhoneFormatted = true;
             }
+        } else if (data.phoneN === "") {
+            isPhoneFormatted = true;
         }
 
         let isPasswordFormatted: boolean = false;
         if (data.password.length >= 15) {
-            if (regUpper.test(data.password) && regNum.test(data.password) && regSpecial.test(data.password)) {
+            const choppedPassword = data.password.split("");
+            const extraCharArr: string[] = []
+
+            choppedPassword.map((char: string) => {
+                if (regUpper.test(char) === false && regNum.test(char) === false && regSpecial.test(char) === false) {
+                    extraCharArr.push(char);
+                }
+            })
+
+            if (extraCharArr.length === 0) {
                 isPasswordFormatted = true;
             }
         }
@@ -77,7 +88,8 @@ export default function page() {
 
             const response = await fetch('/api/form', options)
             const result = await response.json()
-            // console.log(response);
+            console.log(response);
+            console.log(result);
 
             if (result) {
                 alert("Form Data Submitted Successfully");
