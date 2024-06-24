@@ -1,9 +1,16 @@
 'use client'
 
+import { DateValue, getLocalTimeZone, today } from "@internationalized/date";
+import { DatePicker } from "@nextui-org/date-picker";
+import { datePicker } from "@nextui-org/theme";
+import { useState } from "react";
+
 export default function page() {
+    const regLower = /[a-z]+/;
     const regUpper = /[A-Z]+/;
     const regNum = /[0-9]+/;
     const regSpecial = /[!\?\@\#\$\%\^\&\*]+/;
+    // const [dobGlob, setDobGlob] = useState<DateValue>();
 
     const handleSubmit = async (event: any) => {
         event.preventDefault()
@@ -44,7 +51,7 @@ export default function page() {
             const extraCharArr: string[] = []
 
             choppedPassword.map((char: string) => {
-                if (regUpper.test(char) === false && regNum.test(char) === false && regSpecial.test(char) === false) {
+                if (regUpper.test(char) === false && regNum.test(char) === false && regSpecial.test(char) === false && regLower.test(char) === false) {
                     extraCharArr.push(char);
                 }
             })
@@ -91,6 +98,16 @@ export default function page() {
             console.log(response);
             console.log(result);
 
+            event.target.firstN.value = "";
+            event.target.lastN.value = "";
+            event.target.email.value = "";
+            event.target.dob.value = "";
+            // setDobGlob(undefined);
+            event.target.address.value = "";
+            event.target.phoneN.value = "";
+            event.target.password.value = "";
+            event.target.conPassword.value = "";
+
             if (result) {
                 alert("Form Data Submitted Successfully");
             } else {
@@ -120,7 +137,7 @@ export default function page() {
 
                     <div>
                         <label htmlFor="dob">Date of Birth</label>
-                        <input className="border border-black" type="text" id="dob" name="dob" required />
+                        <DatePicker aria-label="Date Of Birth" id="dob" name="dob" validationBehavior="native" className="border border-black" isRequired radius="none" maxValue={today(getLocalTimeZone())} showMonthAndYearPickers />
                     </div>
 
                     <div>
