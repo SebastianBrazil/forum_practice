@@ -3,7 +3,9 @@ import { NextRequest, NextResponse } from 'next/server'
 export async function POST(request: NextRequest) {
     const formData = await request.json();
 
-    console.log("body: ", formData)
+    if (!formData.firstN || !formData.lastN) {
+        return NextResponse.json({ status: 400, data: `Required Form Data Missing` })
+    }
 
-    return NextResponse.json({status: 200, data: `${formData.first} ${formData.last}` })
+    return NextResponse.json({ status: 200, data: formData })
 }
