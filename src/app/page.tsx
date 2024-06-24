@@ -1,6 +1,10 @@
 'use client'
 
 export default function page() {
+    const regUpper = /[A-Z]+/;
+    const regNum = /[0-9]+/;
+    const regSpecial = /[!\?\@\#\$\%\^\&\*]+/;
+
     const handleSubmit = async (event: any) => {
         event.preventDefault()
 
@@ -15,17 +19,52 @@ export default function page() {
             conPassword: event.target.conPassword.value,
         }
 
-        if (data.firstN.length >= 100 || data.lastN.length >= 100 || data.address.length >= 100) {
-            return "bruh";
+        let isPhoneFormatted: boolean = false;
+        if (data.phoneN[0] == "(" && data.phoneN[4] == ")" && data.phoneN[5] == "-" && data.phoneN[9] == "-") {
+            const splitStr = data.phoneN.split("");
+            let getNumbs: string[] = [];
+
+            splitStr.map((char: string) => {
+                if (regNum.test(char)) {
+                    getNumbs.push(char);
+                }
+            })
+
+            if (getNumbs.length == 10) {
+                console.log(getNumbs);
+                isPhoneFormatted = true;
+            }
         }
 
-        // else if() {
+        let isPasswordFormatted: boolean = false;
+        if (data.password.length >= 15) {
+            if (regUpper.test(data.password) && regNum.test(data.password) && regSpecial.test(data.password)) {
+                isPasswordFormatted = true;
+            }
+        }
 
-        // }
-
-
-
-        else {
+        if (data.firstN.length >= 100) {
+            console.log("bruh first name");
+            return;
+        } else if (data.lastN.length >= 100) {
+            console.log("bruh last name");
+            return;
+        } else if (data.address.length >= 100) {
+            console.log("bruh address");
+            return;
+        } else if (data.email.indexOf('@') == -1) {
+            console.log("bruh Email");
+            return;
+        } else if (isPhoneFormatted === false) {
+            console.log("bruh Phone")
+            return;
+        } else if (isPasswordFormatted === false) {
+            console.log("bruh Password");
+            return;
+        } else if (data.password !== data.conPassword) {
+            console.log("bruh Confirm Password");
+            return;
+        } else {
             const JSONdata = JSON.stringify(data)
 
             const options = {
@@ -43,51 +82,52 @@ export default function page() {
             if (result) {
                 alert("Form Data Submitted Successfully");
             } else {
-                alert("Form Data Failed To Submit");
+                alert("Form Data Failed To Submit - Please Try Again");
             }
         }
     }
+
     return (
         <>
             <div className="">
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <label htmlFor="First Name">First Name</label>
+                        <label htmlFor="firstN">First Name</label>
                         <input className="border border-black" type="text" id="firstN" name="firstN" required />
                     </div>
 
                     <div>
-                        <label htmlFor="Last Name">Last Name</label>
+                        <label htmlFor="lastN">Last Name</label>
                         <input className="border border-black" type="text" id="lastN" name="lastN" required />
                     </div>
 
                     <div>
-                        <label htmlFor="Email">Email</label>
+                        <label htmlFor="email">Email</label>
                         <input className="border border-black" type="text" id="email" name="email" required />
                     </div>
 
                     <div>
-                        <label htmlFor="Date of Birth">Date of Birth</label>
+                        <label htmlFor="dob">Date of Birth</label>
                         <input className="border border-black" type="text" id="dob" name="dob" required />
                     </div>
 
                     <div>
-                        <label htmlFor="Address">Address</label>
+                        <label htmlFor="address">Address</label>
                         <input className="border border-black" type="text" id="address" name="address" />
                     </div>
 
                     <div>
-                        <label htmlFor="Phone Number">Phone Number</label>
+                        <label htmlFor="phoneN">Phone Number</label>
                         <input className="border border-black" type="text" id="phoneN" name="phoneN" />
                     </div>
 
                     <div>
-                        <label htmlFor="Password">Password</label>
+                        <label htmlFor="password">Password</label>
                         <input className="border border-black" type="text" id="password" name="password" required />
                     </div>
 
                     <div>
-                        <label htmlFor="Confirm Password">Confirm Password</label>
+                        <label htmlFor="conPassword">Confirm Password</label>
                         <input className="border border-black" type="text" id="conPassword" name="conPassword" required />
                     </div>
 
