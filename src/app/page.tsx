@@ -1,10 +1,23 @@
 'use client'
 
-export default function page() {
+import { getLocalTimeZone, today } from "@internationalized/date";
+import { useEffect, useState } from "react";
+
+export default function Home() {
     const regLower = /[a-z]+/;
     const regUpper = /[A-Z]+/;
     const regNum = /[0-9]+/;
     const regSpecial = /[!\?\@\#\$\%\^\&\*]+/;
+    const getToday = today(getLocalTimeZone());
+    const [todaysDate, setTodaysDate] = useState<string>();
+
+    useEffect(() => {
+        if (getToday.month.toString().length === 1) {
+            setTodaysDate(getToday.year.toString() + "-0" + getToday.month.toString() + "-" + getToday.day.toString())
+        } else {
+            setTodaysDate(getToday.year.toString() + "-" + getToday.month.toString() + "-" + getToday.day.toString())
+        }
+    }, [])
 
     const handleSubmit = async (event: any) => {
         event.preventDefault()
@@ -32,7 +45,6 @@ export default function page() {
             })
 
             if (getNumbs.length == 10) {
-                console.log(getNumbs);
                 isPhoneFormatted = true;
             }
         } else if (data.phoneN === "") {
@@ -125,12 +137,12 @@ export default function page() {
 
                     <div>
                         <label htmlFor="email">Email</label>
-                        <input className="border border-black" type="text" id="email" name="email" required />
+                        <input className="border border-black" type="email" id="email" name="email" required />
                     </div>
 
                     <div>
                         <label htmlFor="dob">Date of Birth</label>
-                        <input className="border border-black" type="date" id="dob" name="dob" required />
+                        <input min="1900-01-01" max={todaysDate} className="border border-black" type="date" id="dob" name="dob" required />
                     </div>
 
                     <div>
@@ -140,17 +152,17 @@ export default function page() {
 
                     <div>
                         <label htmlFor="phoneN">Phone Number</label>
-                        <input className="border border-black" type="text" id="phoneN" name="phoneN" />
+                        <input className="border border-black" type="tel" id="phoneN" name="phoneN" />
                     </div>
 
                     <div>
                         <label htmlFor="password">Password</label>
-                        <input className="border border-black" type="text" id="password" name="password" required />
+                        <input className="border border-black" type="password" id="password" name="password" required />
                     </div>
 
                     <div>
                         <label htmlFor="conPassword">Confirm Password</label>
-                        <input className="border border-black" type="text" id="conPassword" name="conPassword" required />
+                        <input className="border border-black" type="password" id="conPassword" name="conPassword" required />
                     </div>
 
                     <button type="submit">Submit</button>
