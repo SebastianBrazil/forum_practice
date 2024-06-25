@@ -1,11 +1,6 @@
 'use client'
 
-import { useState } from "react";
-import DatePicker from "react-datepicker";
-
 export default function page() {
-    const [startDate, setStartDate] = useState<Date | null>(new Date());
-
     const regLower = /[a-z]+/;
     const regUpper = /[A-Z]+/;
     const regNum = /[0-9]+/;
@@ -135,9 +130,7 @@ export default function page() {
 
                     <div>
                         <label htmlFor="dob">Date of Birth</label>
-                        <input className="border border-black" type="date" id="email" name="email" required />
-
-                        {/* <DatePicker className="border border-black" selected={startDate} onChange={(date) => setStartDate(date)} /> */}
+                        <input className="border border-black" type="date" id="dob" name="dob" required />
                     </div>
 
                     <div>
