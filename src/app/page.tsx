@@ -3,6 +3,7 @@
 import { getLocalTimeZone, today } from "@internationalized/date";
 import { useEffect, useRef, useState } from "react";
 import { FormData } from "./interfaces/interfaces";
+import hank from "./assets/hank.png"
 
 export default function Home() {
     const regLower = /[a-z]+/;
@@ -120,50 +121,57 @@ export default function Home() {
 
     return (
         <>
-            <div>
-                <form ref={formRef} onSubmit={handleSubmit}>
+            <div className="h-full min-h-screen ">
+                <div className="flex justify-around">
                     <div>
-                        <label htmlFor="firstN">First Name</label>
-                        <input className="border border-black" type="text" id="firstN" name="firstN" required />
+                        <img width={640} height={420} className="w-[640px] h-[420px]" src={hank.src} alt="Mr. Hank" />
                     </div>
+                    <div className="border w-[640px] border-black text-white">
+                        <form ref={formRef} onSubmit={handleSubmit}>
+                            <div>
+                                <label htmlFor="firstN">First Name</label>
+                                <input placeholder="Required" className="border border-black text-black" type="text" id="firstN" name="firstN" required />
+                            </div>
 
-                    <div>
-                        <label htmlFor="lastN">Last Name</label>
-                        <input className="border border-black" type="text" id="lastN" name="lastN" required />
+                            <div>
+                                <label htmlFor="lastN">Last Name</label>
+                                <input placeholder="Required" className="border border-black text-black" type="text" id="lastN" name="lastN" required />
+                            </div>
+
+                            <div>
+                                <label htmlFor="email">Email</label>
+                                <input placeholder="Required" className="border border-black text-black" type="email" id="email" name="email" required />
+                            </div>
+
+                            <div>
+                                <label htmlFor="dob">Date of Birth</label>
+                                <input placeholder="Required" min="1900-01-01" max={todaysDate} className="border border-black text-black" type="date" id="dob" name="dob" required />
+                            </div>
+
+                            <div>
+                                <label htmlFor="address">Address</label>
+                                <input placeholder="Optional" className="border border-black text-black" type="text" id="address" name="address" />
+                            </div>
+
+                            <div>
+                                <label htmlFor="phoneN">Phone Number</label>
+                                <input placeholder="Optional" className="border border-black text-black" type="tel" id="phoneN" name="phoneN" />
+                            </div>
+
+                            <div>
+                                <label htmlFor="password">Password</label>
+                                <input placeholder="Required" className="border border-black text-black" type="password" id="password" name="password" required />
+                            </div>
+
+                            <div>
+                                <label htmlFor="conPassword">Confirm Password</label>
+                                <input placeholder="Required" className="border border-black text-black" type="password" id="conPassword" name="conPassword" required />
+                            </div>
+
+                            <button type="submit">Submit</button>
+                        </form>
                     </div>
-
-                    <div>
-                        <label htmlFor="email">Email</label>
-                        <input className="border border-black" type="email" id="email" name="email" required />
-                    </div>
-
-                    <div>
-                        <label htmlFor="dob">Date of Birth</label>
-                        <input min="1900-01-01" max={todaysDate} className="border border-black" type="date" id="dob" name="dob" required />
-                    </div>
-
-                    <div>
-                        <label htmlFor="address">Address</label>
-                        <input className="border border-black" type="text" id="address" name="address" />
-                    </div>
-
-                    <div>
-                        <label htmlFor="phoneN">Phone Number</label>
-                        <input className="border border-black" type="tel" id="phoneN" name="phoneN" />
-                    </div>
-
-                    <div>
-                        <label htmlFor="password">Password</label>
-                        <input className="border border-black" type="password" id="password" name="password" required />
-                    </div>
-
-                    <div>
-                        <label htmlFor="conPassword">Confirm Password</label>
-                        <input className="border border-black" type="password" id="conPassword" name="conPassword" required />
-                    </div>
-
-                    <button type="submit">Submit</button>
-                </form>
+                </div>
             </div>
         </>
     )
