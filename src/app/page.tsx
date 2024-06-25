@@ -121,54 +121,56 @@ export default function Home() {
 
     return (
         <>
-            <div className="h-full min-h-screen ">
-                <div className="flex justify-around">
+            <div className="h-full min-h-screen">
+                <div className="flex justify-around pt-20">
                     <div>
                         <img width={640} height={420} className="w-[640px] h-[420px]" src={hank.src} alt="Mr. Hank" />
                     </div>
-                    <div className="border w-[640px] border-black text-white">
-                        <form ref={formRef} onSubmit={handleSubmit}>
-                            <div>
-                                <label htmlFor="firstN">First Name</label>
-                                <input placeholder="Required" className="border border-black text-black" type="text" id="firstN" name="firstN" required />
+                    <div className=" border-4 w-[640px] border-white flex justify-center text-white">
+                        <form className="mt-6" ref={formRef} onSubmit={handleSubmit}>
+                            <div className="w-96 mb-4 flex justify-between">
+                                <label htmlFor="firstN">First Name: </label>
+                                <input placeholder="Required" className="border w-40 pl-2 border-black text-black" type="text" id="firstN" name="firstN" required />
                             </div>
 
-                            <div>
-                                <label htmlFor="lastN">Last Name</label>
-                                <input placeholder="Required" className="border border-black text-black" type="text" id="lastN" name="lastN" required />
+                            <div className="w-96 mb-4 flex justify-between">
+                                <label htmlFor="lastN">Last Name: </label>
+                                <input placeholder="Required" className="border w-40 pl-2 border-black text-black" type="text" id="lastN" name="lastN" required />
                             </div>
 
-                            <div>
-                                <label htmlFor="email">Email</label>
-                                <input placeholder="Required" className="border border-black text-black" type="email" id="email" name="email" required />
+                            <div className="w-96 mb-4 flex justify-between">
+                                <label htmlFor="email">Email: </label>
+                                <input placeholder="Required" className="border w-40 pl-2 border-black text-black" type="email" id="email" name="email" required />
                             </div>
 
-                            <div>
-                                <label htmlFor="dob">Date of Birth</label>
-                                <input placeholder="Required" min="1900-01-01" max={todaysDate} className="border border-black text-black" type="date" id="dob" name="dob" required />
+                            <div className="w-96 mb-4 flex justify-between">
+                                <label htmlFor="dob">Date of Birth: </label>
+                                <input placeholder="Required" min="1900-01-01" max={todaysDate} className="border w-40 pl-2 border-black text-black" type="date" id="dob" name="dob" required />
                             </div>
 
-                            <div>
-                                <label htmlFor="address">Address</label>
-                                <input placeholder="Optional" className="border border-black text-black" type="text" id="address" name="address" />
+                            <div className="w-96 mb-4 flex justify-between">
+                                <label htmlFor="address">Address: </label>
+                                <input placeholder="Optional" className="border w-40 pl-2 border-black text-black" type="text" id="address" name="address" />
                             </div>
 
-                            <div>
-                                <label htmlFor="phoneN">Phone Number</label>
-                                <input placeholder="Optional" className="border border-black text-black" type="tel" id="phoneN" name="phoneN" />
+                            <div className="w-96 mb-4 flex justify-between">
+                                <label htmlFor="phoneN">Phone Number: </label>
+                                <input placeholder="Optional" className="border w-40 pl-2 border-black text-black" type="tel" id="phoneN" name="phoneN" />
                             </div>
 
-                            <div>
-                                <label htmlFor="password">Password</label>
-                                <input placeholder="Required" className="border border-black text-black" type="password" id="password" name="password" required />
+                            <div className="w-96 mb-4 flex justify-between">
+                                <label htmlFor="password">Password: </label>
+                                <input placeholder="Required" className="border w-40 pl-2 border-black text-black" type="password" id="password" name="password" required />
                             </div>
 
-                            <div>
-                                <label htmlFor="conPassword">Confirm Password</label>
-                                <input placeholder="Required" className="border border-black text-black" type="password" id="conPassword" name="conPassword" required />
+                            <div className="w-96 mb-4 flex justify-between">
+                                <label htmlFor="conPassword">Confirm Password: </label>
+                                <input placeholder="Required" className="border w-40 pl-2 border-black text-black" type="password" id="conPassword" name="conPassword" required />
                             </div>
 
-                            <button type="submit">Submit</button>
+                            <div className="flex justify-center">
+                                <button className="bg-white text-black w-32 mt-2" type="submit">Submit</button>
+                            </div>
                         </form>
                     </div>
                 </div>
