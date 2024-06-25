@@ -1,16 +1,15 @@
 'use client'
 
-import { DateValue, getLocalTimeZone, today } from "@internationalized/date";
-import { DatePicker } from "@nextui-org/date-picker";
-import { datePicker } from "@nextui-org/theme";
 import { useState } from "react";
+import DatePicker from "react-datepicker";
 
 export default function page() {
+    const [startDate, setStartDate] = useState<Date | null>(new Date());
+
     const regLower = /[a-z]+/;
     const regUpper = /[A-Z]+/;
     const regNum = /[0-9]+/;
     const regSpecial = /[!\?\@\#\$\%\^\&\*]+/;
-    // const [dobGlob, setDobGlob] = useState<DateValue>();
 
     const handleSubmit = async (event: any) => {
         event.preventDefault()
@@ -102,7 +101,6 @@ export default function page() {
             event.target.lastN.value = "";
             event.target.email.value = "";
             event.target.dob.value = "";
-            // setDobGlob(undefined);
             event.target.address.value = "";
             event.target.phoneN.value = "";
             event.target.password.value = "";
@@ -118,7 +116,7 @@ export default function page() {
 
     return (
         <>
-            <div className="">
+            <div>
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="firstN">First Name</label>
@@ -137,7 +135,9 @@ export default function page() {
 
                     <div>
                         <label htmlFor="dob">Date of Birth</label>
-                        <DatePicker aria-label="Date Of Birth" id="dob" name="dob" validationBehavior="native" className="border border-black" isRequired radius="none" maxValue={today(getLocalTimeZone())} showMonthAndYearPickers />
+                        <input className="border border-black" type="date" id="email" name="email" required />
+
+                        {/* <DatePicker className="border border-black" selected={startDate} onChange={(date) => setStartDate(date)} /> */}
                     </div>
 
                     <div>
