@@ -1,7 +1,8 @@
 'use client'
 
 import { getLocalTimeZone, today } from "@internationalized/date";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { FormData } from "./interfaces/interfaces";
 
 export default function Home() {
     const regLower = /[a-z]+/;
@@ -10,6 +11,7 @@ export default function Home() {
     const regSpecial = /[!\?\@\#\$\%\^\&\*]+/;
     const getToday = today(getLocalTimeZone());
     const [todaysDate, setTodaysDate] = useState<string>();
+    const formRef = useRef<HTMLFormElement>(null);
 
     useEffect(() => {
         if (getToday.month.toString().length === 1) {
@@ -19,19 +21,19 @@ export default function Home() {
         }
     }, [])
 
-    const handleSubmit = async (event: any) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
-        const data = {
-            firstN: event.target.firstN.value,
-            lastN: event.target.lastN.value,
-            email: event.target.email.value,
-            dob: event.target.dob.value,
-            address: event.target.address.value,
-            phoneN: event.target.phoneN.value,
-            password: event.target.password.value,
-            conPassword: event.target.conPassword.value,
-        }
+        const data: FormData = {
+            firstN: (event.currentTarget.elements.namedItem('firstN') as HTMLInputElement).value,
+            lastN: (event.currentTarget.elements.namedItem('lastN') as HTMLInputElement).value,
+            email: (event.currentTarget.elements.namedItem('email') as HTMLInputElement).value,
+            dob: (event.currentTarget.elements.namedItem('dob') as HTMLInputElement).value,
+            address: (event.currentTarget.elements.namedItem('address') as HTMLInputElement).value,
+            phoneN: (event.currentTarget.elements.namedItem('phoneN') as HTMLInputElement).value,
+            password: (event.currentTarget.elements.namedItem('password') as HTMLInputElement).value,
+            conPassword: (event.currentTarget.elements.namedItem('conPassword') as HTMLInputElement).value,
+        };
 
         let isPhoneFormatted: boolean = false;
         if (data.phoneN[0] == "(" && data.phoneN[4] == ")" && data.phoneN[5] == "-" && data.phoneN[9] == "-") {
@@ -101,17 +103,12 @@ export default function Home() {
 
             const response = await fetch('/api/form', options)
             const result = await response.json()
-            console.log(response);
-            console.log(result);
+            // console.log(response);
+            // console.log(result);
 
-            event.target.firstN.value = "";
-            event.target.lastN.value = "";
-            event.target.email.value = "";
-            event.target.dob.value = "";
-            event.target.address.value = "";
-            event.target.phoneN.value = "";
-            event.target.password.value = "";
-            event.target.conPassword.value = "";
+            if (formRef.current) {
+                formRef.current.reset();
+            }
 
             if (result) {
                 alert("Form Data Submitted Successfully");
@@ -124,7 +121,7 @@ export default function Home() {
     return (
         <>
             <div>
-                <form onSubmit={handleSubmit}>
+                <form ref={formRef} onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="firstN">First Name</label>
                         <input className="border border-black" type="text" id="firstN" name="firstN" required />
