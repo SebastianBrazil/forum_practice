@@ -133,54 +133,60 @@ export default function Home() {
         <>
             <div className="h-full min-h-screen">
                 {isModalOpen && modalText && <ModalComponent setIsModalOpen={setIsModalOpen} setModalText={setModalText} modalText={modalText} />}
-                <div className="flex justify-around pt-20">
-                    <div>
-                        <img width={640} height={420} className="w-[640px] h-[420px]" src={hank.src} alt="Mr. Hank" />
+                <div className="text-center pt-10 md:pt-20">
+                    <h1 className="AG text-white max-md:px-4 text-4xl md:text-6xl">Hank Schrader Fan Club</h1>
+                </div>
+
+                <div className="max-xl:mb-10 max-xl:grid xl:flex max-xl:flex-col max-xl:justify-center xl:justify-between mx-auto max-w-[1440px] px-10 pt-4 md:pt-10">
+                    <div className="flex justify-center max-xl:mb-10">
+                        <img className="rounded-sm w-[640px] h-auto xl:h-[440px]" src={hank.src} alt="Mr. Hank" />
                     </div>
-                    <div className=" border-4 w-[640px] border-white flex justify-center text-white">
-                        <form className="mt-6" ref={formRef} onSubmit={handleSubmit}>
-                            <div className="w-96 mb-4 flex justify-between">
-                                <label htmlFor="firstN">First Name: </label>
-                                <input placeholder="Required" className="border w-40 pl-2 border-black text-black" type="text" id="firstN" name="firstN" required />
+                    <div className="border-t-4 md:border-4 px-0 md:px-10 xl:px-0 xl:w-[640px] border-white flex justify-center text-white">
+                        <form className="mt-4" ref={formRef} onSubmit={handleSubmit}>
+                            <p className="text-lg md:text-2xl text-center mb-4">Create Account</p>
+
+                            <div className="md:w-96 mb-2 flex max-md:flex-col justify-between">
+                                <label className="md:text-xl" htmlFor="firstN">First Name: </label>
+                                <input placeholder="Required" className="border md:w-40 pl-2 border-black text-black" type="text" id="firstN" name="firstN" required />
                             </div>
 
-                            <div className="w-96 mb-4 flex justify-between">
-                                <label htmlFor="lastN">Last Name: </label>
-                                <input placeholder="Required" className="border w-40 pl-2 border-black text-black" type="text" id="lastN" name="lastN" required />
+                            <div className="md:w-96 mb-2 flex max-md:flex-col justify-between">
+                                <label className="md:text-xl" htmlFor="lastN">Last Name: </label>
+                                <input placeholder="Required" className="border md:w-40 pl-2 border-black text-black" type="text" id="lastN" name="lastN" required />
                             </div>
 
-                            <div className="w-96 mb-4 flex justify-between">
-                                <label htmlFor="email">Email: </label>
-                                <input placeholder="Required" className="border w-40 pl-2 border-black text-black" type="email" id="email" name="email" required />
+                            <div className="md:w-96 mb-2 flex max-md:flex-col justify-between">
+                                <label className="md:text-xl" htmlFor="email">Email: </label>
+                                <input placeholder="Required" className="border md:w-40 pl-2 border-black text-black" type="email" id="email" name="email" required />
                             </div>
 
-                            <div className="w-96 mb-4 flex justify-between">
-                                <label htmlFor="dob">Date of Birth: </label>
-                                <input placeholder="Required" min="1900-01-01" max={todaysDate} className="border w-40 pl-2 border-black text-black" type="date" id="dob" name="dob" required />
+                            <div className="md:w-96 mb-2 flex max-md:flex-col justify-between">
+                                <label className="md:text-xl" htmlFor="dob">Date of Birth: </label>
+                                <input placeholder="Required" min="1900-01-01" max={todaysDate} className="border md:w-40 pl-2 border-black text-black" type="date" id="dob" name="dob" required />
                             </div>
 
-                            <div className="w-96 mb-4 flex justify-between">
-                                <label htmlFor="address">Address: </label>
-                                <input placeholder="Optional" className="border w-40 pl-2 border-black text-black" type="text" id="address" name="address" />
+                            <div className="md:w-96 mb-2 flex max-md:flex-col justify-between">
+                                <label className="md:text-xl" htmlFor="address">Address: </label>
+                                <input placeholder="Optional" className="border md:w-40 pl-2 border-black text-black" type="text" id="address" name="address" />
                             </div>
 
-                            <div className="w-96 mb-4 flex justify-between">
-                                <label htmlFor="phoneN">Phone Number: </label>
-                                <input placeholder="Optional" className="border w-40 pl-2 border-black text-black" type="tel" id="phoneN" name="phoneN" />
+                            <div className="md:w-96 mb-2 flex max-md:flex-col justify-between">
+                                <label className="md:text-xl" htmlFor="phoneN">Phone Number: </label>
+                                <input placeholder="Optional" className="border md:w-40 pl-2 border-black text-black" type="tel" id="phoneN" name="phoneN" />
                             </div>
 
-                            <div className="w-96 mb-4 flex justify-between">
-                                <label htmlFor="password">Password: </label>
-                                <input placeholder="Required" className="border w-40 pl-2 border-black text-black" type="password" id="password" name="password" required />
+                            <div className="md:w-96 mb-2 flex max-md:flex-col justify-between">
+                                <label className="md:text-xl" htmlFor="password">Password: </label>
+                                <input placeholder="Required" className="border md:w-40 pl-2 border-black text-black" type="password" id="password" name="password" required />
                             </div>
 
-                            <div className="w-96 mb-4 flex justify-between">
-                                <label htmlFor="conPassword">Confirm Password: </label>
-                                <input placeholder="Required" className="border w-40 pl-2 border-black text-black" type="password" id="conPassword" name="conPassword" required />
+                            <div className="md:w-96 mb-2 flex max-md:flex-col justify-between">
+                                <label className="md:text-xl" htmlFor="conPassword">Confirm Password: </label>
+                                <input placeholder="Required" className="border md:w-40 pl-2 border-black text-black" type="password" id="conPassword" name="conPassword" required />
                             </div>
 
                             <div className="flex justify-center">
-                                <button className="bg-white text-black w-32 mt-2" type="submit">Submit</button>
+                                <button className="bg-white text-sm text-black w-32 my-4" type="submit">Submit</button>
                             </div>
                         </form>
                     </div>

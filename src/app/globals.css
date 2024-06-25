@@ -5,3 +5,12 @@
 body {
     background-color: #006600;
 }
+
+@font-face {
+    font-family: AG;
+    src: url(./assets/fonts/Agbalumo-Regular.ttf);
+}
+
+.AG {
+    font-family: AG;
+}
