@@ -4,6 +4,7 @@ import { getLocalTimeZone, today } from "@internationalized/date";
 import { useEffect, useRef, useState } from "react";
 import { FormData } from "./interfaces/interfaces";
 import hank from "./assets/hank.png"
+import ModalComponent from "./Components/ModalComponent";
 
 export default function Home() {
     const regLower = /[a-z]+/;
@@ -12,6 +13,8 @@ export default function Home() {
     const regSpecial = /[!\?\@\#\$\%\^\&\*]+/;
     const getToday = today(getLocalTimeZone());
     const [todaysDate, setTodaysDate] = useState<string>();
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [modalText, setModalText] = useState<string>();
     const formRef = useRef<HTMLFormElement>(null);
 
     useEffect(() => {
@@ -71,25 +74,32 @@ export default function Home() {
         }
 
         if (data.firstN.length >= 100) {
-            console.log("bruh first name");
+            setIsModalOpen(true);
+            setModalText("Please Input A First Name Less Than 100 Characters");
             return;
         } else if (data.lastN.length >= 100) {
-            console.log("bruh last name");
+            setIsModalOpen(true);
+            setModalText("Please Input A Last Name Less Than 100 Characters");
             return;
         } else if (data.address.length >= 100) {
-            console.log("bruh address");
+            setIsModalOpen(true);
+            setModalText("Please Input An Address Less Than 100 Characters");
             return;
         } else if (data.email.indexOf('@') == -1) {
-            console.log("bruh Email");
+            setIsModalOpen(true);
+            setModalText("Please Input A Valid Email (Include @)");
             return;
         } else if (isPhoneFormatted === false) {
-            console.log("bruh Phone")
+            setIsModalOpen(true);
+            setModalText("Please Input A Phone Number In The Following Format: (123)-456-7890");
             return;
         } else if (isPasswordFormatted === false) {
-            console.log("bruh Password");
+            setIsModalOpen(true);
+            setModalText("Please Input A Password That Is 15 Characters Or Longer, With 1 Uppercase Letter, 1 Special Character, and 1 Number");
             return;
         } else if (data.password !== data.conPassword) {
-            console.log("bruh Confirm Password");
+            setIsModalOpen(true);
+            setModalText("Please Make Sure Passwords Match");
             return;
         } else {
             const JSONdata = JSON.stringify(data)
@@ -104,17 +114,17 @@ export default function Home() {
 
             const response = await fetch('/api/form', options)
             const result = await response.json()
-            // console.log(response);
-            // console.log(result);
 
             if (formRef.current) {
                 formRef.current.reset();
             }
 
             if (result) {
-                alert("Form Data Submitted Successfully");
+                setIsModalOpen(true);
+                setModalText("Form Data Submitted Successfully");
             } else {
-                alert("Form Data Failed To Submit - Please Try Again");
+                setIsModalOpen(true);
+                setModalText("Form Data Failed To Submit - Please Try Again");
             }
         }
     }
@@ -122,6 +132,7 @@ export default function Home() {
     return (
         <>
             <div className="h-full min-h-screen">
+                {isModalOpen && modalText && <ModalComponent setIsModalOpen={setIsModalOpen} setModalText={setModalText} modalText={modalText} />}
                 <div className="flex justify-around pt-20">
                     <div>
                         <img width={640} height={420} className="w-[640px] h-[420px]" src={hank.src} alt="Mr. Hank" />

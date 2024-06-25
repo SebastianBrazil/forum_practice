@@ -8,3 +8,9 @@ export interface FormData {
     password: string;
     conPassword: string;
 }
+
+export interface IModalProps {
+    modalText: string,
+    setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
+    setModalText: React.Dispatch<React.SetStateAction<string | undefined>>
+}
